@@ -86,7 +86,11 @@ class _HomeViewState extends State<HomeView> with WindowListener {
       appBar: NavigationAppBar(
         title: Row(
           children: [
-            Image.asset('assets/logo_mabel.png', height: 30),
+            Image.asset(
+              'assets/logo_simple.png',
+              height: 30,
+              filterQuality: FilterQuality.medium,
+            ),
             const SizedBox(width: 20),
             FutureBuilder(
                 future: PackageInfo.fromPlatform(),

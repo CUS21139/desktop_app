@@ -11,7 +11,6 @@ import '/src/presentation/ui/home_view.dart';
 import '/src/services/init_service.dart';
 import '/src/services/login_service.dart';
 
-
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -58,21 +57,24 @@ class _LoginPageState extends State<LoginPage> with WindowListener {
       appBar: NavigationAppBar(
         title: Row(
           children: [
-            Image.asset('assets/logo_mabel.png', height: 30),
+            Image.asset(
+              'assets/logo_simple.png',
+              height: 30,
+              filterQuality: FilterQuality.medium,
+            ),
             const SizedBox(width: 20),
             FutureBuilder(
-              future: PackageInfo.fromPlatform(),
-              builder: (context, snap) {
-                final version = snap.hasData ? snap.data!.version : '1.0.0';
-                return Text(
-                  'MABEL Admin v$version',
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                );
-              }
-            ),
+                future: PackageInfo.fromPlatform(),
+                builder: (context, snap) {
+                  final version = snap.hasData ? snap.data!.version : '1.0.0';
+                  return Text(
+                    'MABEL Admin v$version',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                }),
           ],
         ),
         backgroundColor: Colors.white,
@@ -95,7 +97,8 @@ class _LoginPageState extends State<LoginPage> with WindowListener {
                     Center(
                       child: Image.asset(
                         'assets/logo_mabel.png',
-                        height: size.height * 0.2,
+                        height: size.height * 0.25,
+                        filterQuality: FilterQuality.medium,
                       ),
                     ),
                     const SizedBox(height: 60),
@@ -160,8 +163,7 @@ class _LoginPageState extends State<LoginPage> with WindowListener {
                   ),
                 ),
                 Align(
-                  alignment: 
-                  Alignment.center,
+                  alignment: Alignment.center,
                   child: SizedBox(
                     height: size.height,
                     width: size.width * 0.5,
