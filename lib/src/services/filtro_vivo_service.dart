@@ -8,7 +8,7 @@ import '../models/producto_vivo.dart';
 import '/src/models/proveedor.dart';
 import '/src/models/zona.dart';
 
-import '/src/presentation/providers/ayer_hoy_provider.dart';
+import '../presentation/providers/ayer_hoy_vivo_provider.dart';
 import '../presentation/providers/compras_vivo_provider.dart';
 import '../presentation/providers/ordenes_modelo_vivo_provider.dart';
 import '../presentation/providers/ordenes_vivo_provider.dart';

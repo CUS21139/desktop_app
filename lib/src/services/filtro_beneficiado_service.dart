@@ -8,7 +8,7 @@ import '/src/models/producto_beneficiado.dart';
 import '/src/models/proveedor.dart';
 import '/src/models/zona.dart';
 
-import '/src/presentation/providers/ayer_hoy_provider.dart';
+import '../presentation/providers/ayer_hoy_vivo_provider.dart';
 import '/src/presentation/providers/compras_beneficiado_provider.dart';
 import '/src/presentation/providers/ordenes_beneficiado_provider.dart';
 import '/src/presentation/providers/ordenes_modelo_beneficiado_provider.dart';

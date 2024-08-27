@@ -4,11 +4,11 @@ import 'package:provider/provider.dart';
 import '/src/models/producto_beneficiado.dart';
 import '/src/models/proveedor.dart';
 
+import '/src/presentation/components/hoy_ayer_ben_widget.dart';
 import '/src/presentation/components/custom_datepicker.dart';
 import '/src/presentation/components/custom_dialogs.dart';
-import '/src/presentation/components/hoy_ayer_widget.dart';
 
-import '/src/presentation/providers/ayer_hoy_provider.dart';
+import '/src/presentation/providers/ayer_hoy_ben_provider.dart';
 import '/src/presentation/providers/productos_beneficiado_provider.dart';
 import '/src/presentation/providers/proveedores_provider.dart';
 
@@ -54,7 +54,7 @@ class _FiltrosComprasVivosState extends State<FiltrosComprasVivos> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const HoyAyerWidget(),
+          const HoyAyerBeneficiadoWidget(),
           const SizedBox(height: 20),
           const Text('Filtros de Busqueda', style: subtitleDataDBStyle),
           const SizedBox(height: 15),
@@ -118,7 +118,7 @@ class _FiltrosComprasVivosState extends State<FiltrosComprasVivos> {
   }
 
   Future<void> filtrar() async {
-    final fechaProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final fechaProv = Provider.of<AyerHoyBenProv>(context, listen: false);
     DateTime date;
     if (fecha != null) {
       date = fecha!;

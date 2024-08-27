@@ -156,13 +156,13 @@ class _ClientesViewState extends State<ClientesView> {
                         ),
                       ],
                     ),
-                    Flex(
-                      direction: Axis.horizontal,
-                      children: [
-                        const SizedBox(width: 100, child: Text('')),
-                        SizedBox(child: Text('Usuario: ${cliente.usuario}')),
-                      ],
-                    )
+                    // Flex(
+                    //   direction: Axis.horizontal,
+                    //   children: [
+                    //     const SizedBox(width: 100, child: Text('')),
+                    //     SizedBox(child: Text('Usuario: ${cliente.usuario}')),
+                    //   ],
+                    // )
                   ],
                 );
               },
@@ -204,8 +204,8 @@ class _ClientesViewState extends State<ClientesView> {
     final codigoCtrl = TextEditingController();
     final nombreCtrl = TextEditingController();
     final celularCtrl = TextEditingController();
-    final usuarioCtrl = TextEditingController();
-    final passCtrl = TextEditingController();
+    // final usuarioCtrl = TextEditingController();
+    // final passCtrl = TextEditingController();
 
     showDialog(
       context: context,
@@ -243,18 +243,18 @@ class _ClientesViewState extends State<ClientesView> {
                 title: 'Celular',
                 width: 400,
               ),
-              const SizedBox(height: 10),
-              CustomTextBox(
-                controller: usuarioCtrl,
-                title: 'Usuario',
-                width: 400,
-              ),
-              const SizedBox(height: 10),
-              CustomTextBox(
-                controller: passCtrl,
-                title: 'Contraseña',
-                width: 400,
-              ),
+              // const SizedBox(height: 10),
+              // CustomTextBox(
+              //   controller: usuarioCtrl,
+              //   title: 'Usuario',
+              //   width: 400,
+              // ),
+              // const SizedBox(height: 10),
+              // CustomTextBox(
+              //   controller: passCtrl,
+              //   title: 'Contraseña',
+              //   width: 400,
+              // ),
             ],
           ),
         ),
@@ -265,22 +265,22 @@ class _ClientesViewState extends State<ClientesView> {
               CustomDialog.loadingDialog(context);
 
               //validar que no existe usuario
-              for (var cliente in clientesProv.clientes) {
-                if (cliente.usuario == usuarioCtrl.text) {
-                  Navigator.pop(context);
-                  return CustomDialog.errorDialog(
-                      context, 'El usuario ya esta en uso');
-                }
-              }
+              // for (var cliente in clientesProv.clientes) {
+              //   if (cliente.usuario == usuarioCtrl.text) {
+              //     Navigator.pop(context);
+              //     return CustomDialog.errorDialog(
+              //         context, 'El usuario ya esta en uso');
+              //   }
+              // }
 
               final cliente = Cliente(
                 createdAt: DateTime.now(),
                 createdBy: user,
                 nombre: nombreCtrl.text,
-                celular: int.tryParse(celularCtrl.text),
+                celular: celularCtrl.text,
                 zonaCode: codigoCtrl.text,
-                usuario: usuarioCtrl.text,
-                password: passCtrl.text,
+                // usuario: usuarioCtrl.text,
+                // password: passCtrl.text,
               );
               await service.insertCliente(cliente, token).then((v) async {
                 await service.getClientes(token).then((value) {
@@ -319,10 +319,10 @@ class _ClientesViewState extends State<ClientesView> {
     saldoMaxCtrl.text = cliente.saldoMaximo!.toStringAsFixed(2);
     final saldoMinCtrl = TextEditingController();
     saldoMinCtrl.text = cliente.saldoMinimo!.toStringAsFixed(2);
-    final usuarioCtrl = TextEditingController();
-    usuarioCtrl.text = cliente.usuario;
-    final passCtrl = TextEditingController();
-    passCtrl.text = cliente.password;
+    // final usuarioCtrl = TextEditingController();
+    // usuarioCtrl.text = cliente.usuario;
+    // final passCtrl = TextEditingController();
+    // passCtrl.text = cliente.password;
 
     showDialog(
       context: context,
@@ -372,18 +372,18 @@ class _ClientesViewState extends State<ClientesView> {
                 title: 'Saldo Mínimo',
                 width: 400,
               ),
-              const SizedBox(height: 10),
-              CustomTextBox(
-                controller: usuarioCtrl,
-                title: 'Usuario',
-                width: 400,
-              ),
-              const SizedBox(height: 10),
-              CustomTextBox(
-                controller: passCtrl,
-                title: 'Contraseña',
-                width: 400,
-              ),
+              // const SizedBox(height: 10),
+              // CustomTextBox(
+              //   controller: usuarioCtrl,
+              //   title: 'Usuario',
+              //   width: 400,
+              // ),
+              // const SizedBox(height: 10),
+              // CustomTextBox(
+              //   controller: passCtrl,
+              //   title: 'Contraseña',
+              //   width: 400,
+              // ),
             ],
           ),
         ),
@@ -395,24 +395,24 @@ class _ClientesViewState extends State<ClientesView> {
               final newCliente = cliente.copyWith(
                 newZone: codigoCtrl.text,
                 newNombre: nombreCtrl.text,
-                newCelular: int.tryParse(celularCtrl.text),
+                newCelular: celularCtrl.text,
                 newSaldoMaximo: double.tryParse(saldoMaxCtrl.text),
                 newSaldoMinimo: double.tryParse(saldoMinCtrl.text),
-                newUsuario: usuarioCtrl.text,
-                newPass: passCtrl.text,
+                // newUsuario: usuarioCtrl.text,
+                // newPass: passCtrl.text,
               );
-              final userOK = usuarioCtrl.text.trim() == cliente.usuario.trim();
+              // final userOK = usuarioCtrl.text.trim() == cliente.usuario.trim();
 
-              if (!userOK) {
-                //validar que no existe usuario
-                for (var cl in clientesProv.clientes) {
-                  if (cl.usuario == usuarioCtrl.text) {
-                    Navigator.pop(context);
-                    return CustomDialog.errorDialog(
-                        context, 'El usuario ya esta en uso');
-                  }
-                }
-              }
+              // if (!userOK) {
+              //   //validar que no existe usuario
+              //   for (var cl in clientesProv.clientes) {
+              //     if (cl.usuario == usuarioCtrl.text) {
+              //       Navigator.pop(context);
+              //       return CustomDialog.errorDialog(
+              //           context, 'El usuario ya esta en uso');
+              //     }
+              //   }
+              // }
 
               await service.updateCliente(newCliente, token).then((v) async {
                 await service.getClientes(token).then((value) {

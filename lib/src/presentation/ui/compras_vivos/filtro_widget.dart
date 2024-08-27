@@ -6,8 +6,8 @@ import '/src/models/proveedor.dart';
 
 import '/src/presentation/components/custom_datepicker.dart';
 import '/src/presentation/components/custom_dialogs.dart';
-import '/src/presentation/components/hoy_ayer_widget.dart';
-import '/src/presentation/providers/ayer_hoy_provider.dart';
+import '../../components/hoy_ayer_vivo_widget.dart';
+import '../../providers/ayer_hoy_vivo_provider.dart';
 import '../../providers/productos_vivo_provider.dart';
 import '/src/presentation/providers/proveedores_provider.dart';
 
@@ -53,7 +53,7 @@ class _FiltrosComprasState extends State<FiltrosCompras> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const HoyAyerWidget(),
+          const HoyAyerVivoWidget(),
           const SizedBox(height: 20),
           const Text('Filtros de Busqueda', style: subtitleDataDBStyle),
           const SizedBox(height: 15),

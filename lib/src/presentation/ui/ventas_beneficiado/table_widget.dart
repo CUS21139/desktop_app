@@ -13,7 +13,7 @@ import '/src/presentation/components/custom_dialogs.dart';
 import '/src/presentation/components/custom_textfield.dart';
 import '/src/presentation/components/table_cell.dart';
 
-import '/src/presentation/providers/ayer_hoy_provider.dart';
+import '/src/presentation/providers/ayer_hoy_ben_provider.dart';
 import '/src/presentation/providers/clientes_provider.dart';
 import '/src/presentation/providers/usuarios_provider.dart';
 import '/src/presentation/providers/ventas_beneficiado_provider.dart';
@@ -191,7 +191,7 @@ class _TableVentasBeneficiadoState extends State<TableVentasBeneficiado> {
     final token = Provider.of<UsuariosProv>(context, listen: false).token;
     final clienteProv = Provider.of<ClientesProv>(context, listen: false);
     final ventaProv = Provider.of<VentasBeneficiadoProv>(context, listen: false);
-    final fechaProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final fechaProv = Provider.of<AyerHoyBenProv>(context, listen: false);
 
     final now = fechaProv.ayer
         ? DateTime.now().subtract(const Duration(days: 1))
@@ -218,7 +218,7 @@ class _TableVentasBeneficiadoState extends State<TableVentasBeneficiado> {
     final token = Provider.of<UsuariosProv>(context, listen: false).token;
     final ventasProv = Provider.of<VentasBeneficiadoProv>(context, listen: false);
     final clienteProv = Provider.of<ClientesProv>(context, listen: false);
-    final fechaProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final fechaProv = Provider.of<AyerHoyBenProv>(context, listen: false);
 
     final avesCtrl = TextEditingController();
     final netoCtrl = TextEditingController();
@@ -315,7 +315,7 @@ class _TableVentasBeneficiadoState extends State<TableVentasBeneficiado> {
     final token = Provider.of<UsuariosProv>(context, listen: false).token;
     final ventaProv = Provider.of<VentasBeneficiadoProv>(context, listen: false);
     final clienteProv = Provider.of<ClientesProv>(context, listen: false);
-    final fechaProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final fechaProv = Provider.of<AyerHoyBenProv>(context, listen: false);
 
     final precioCtrl = TextEditingController();
     precioCtrl.text = ventaProv.venta.precio.toStringAsFixed(2);
@@ -380,7 +380,7 @@ class _TableVentasBeneficiadoState extends State<TableVentasBeneficiado> {
     final token = Provider.of<UsuariosProv>(context, listen: false).token;
     final ventaProv = Provider.of<VentasBeneficiadoProv>(context, listen: false);
     final clienteProv = Provider.of<ClientesProv>(context, listen: false);
-    final fechaProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final fechaProv = Provider.of<AyerHoyBenProv>(context, listen: false);
 
     final now = fechaProv.ayer
         ? DateTime.now().subtract(const Duration(days: 1))

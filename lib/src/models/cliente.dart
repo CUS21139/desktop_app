@@ -18,7 +18,7 @@ class Cliente extends Entity{
 
   final DateTime createdAt;
   final String createdBy;
-  final int? celular;
+  final String? celular;
   final String zonaCode;
   final double? saldoMaximo;
   final double? saldoMinimo;
@@ -27,7 +27,12 @@ class Cliente extends Entity{
   
   String get entityType => 'CL';
 
-  bool get inRangeMax => saldo! < saldoMaximo!;
+  bool get inRangeMax {
+    if(saldoMaximo == 0){
+      return true;
+    }
+    return saldo! < saldoMaximo!;
+  }
   bool get inRangeMin {
     if(saldoMinimo! == 0 ){
       return true;
@@ -67,7 +72,7 @@ class Cliente extends Entity{
 
   Cliente copyWith(
           {String? newNombre,
-          int? newCelular,
+          String? newCelular,
           String? newZone,
           double? newSaldo,
           double? newSaldoMaximo,

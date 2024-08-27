@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/compras_vivo_provider.dart';
-import '../../providers/ventas_vivo_provider.dart';
-import '../../providers/productos_vivo_provider.dart';
+import '/src/presentation/providers/compras_beneficiado_provider.dart';
+import '/src/presentation/providers/productos_beneficiado_provider.dart';
+import '/src/presentation/providers/ventas_beneficiado_provider.dart';
+
 import '/src/presentation/utils/colors.dart';
 import '/src/presentation/utils/text_style.dart';
-import '/src/services/resumen__service.dart';
+import '../../../services/resumen_service.dart';
 
 class ResumenPorProductoBeneficiado extends StatelessWidget {
   const ResumenPorProductoBeneficiado({super.key});
@@ -15,9 +16,9 @@ class ResumenPorProductoBeneficiado extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    final ventasProv = Provider.of<VentasVivoProv>(context);
-    final comprasProv = Provider.of<ComprasVivoProv>(context);
-    final productoProv = Provider.of<ProductosVivoProv>(context);
+    final ventasProv = Provider.of<VentasBeneficiadoProv>(context);
+    final comprasProv = Provider.of<ComprasBeneficiadoProv>(context);
+    final productoProv = Provider.of<ProductosBeneficiadoProv>(context);
     final difAves = ventasProv.totalAvesResumen - comprasProv.sumNroAvesResumen;
     final difPeso = ventasProv.totalPesoResumen - comprasProv.sumPesoResumen;
     final difImporte = ventasProv.totalImporteResumen - comprasProv.sumImporteResumen;

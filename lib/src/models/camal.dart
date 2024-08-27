@@ -7,7 +7,7 @@ class Camal {
     required this.createdBy,
     required this.nombre,
     required this.zonaCode,
-    this.jabas = 0,
+    // this.jabas = 0,
   });
 
   final int? id;
@@ -15,7 +15,7 @@ class Camal {
   final String createdBy;
   final String nombre;
   final String zonaCode;
-  final int jabas;
+  // final int jabas;
 
   factory Camal.fromJson(Map<String, dynamic> json) => Camal(
         id: json['id'],
@@ -23,7 +23,7 @@ class Camal {
         createdBy: json['created_by'],
         nombre: json['nombre'],
         zonaCode: json['zona_code'],
-        jabas: json['jabas'],
+        // jabas: json['jabas'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -32,7 +32,7 @@ class Camal {
         'created_by': createdBy,
         'nombre': nombre,
         'zona_code': zonaCode,
-        'jabas': jabas,
+        // 'jabas': jabas,
       };
 
   Camal copyWith({String? newNombre, String? newZoneCod, int? newJabas}) => Camal(
@@ -41,6 +41,6 @@ class Camal {
         createdBy: createdBy,
         nombre: newNombre ?? nombre,
         zonaCode: newZoneCod ?? zonaCode,
-        jabas: newJabas ?? jabas,
+        // jabas: newJabas ?? jabas,
       );
 }

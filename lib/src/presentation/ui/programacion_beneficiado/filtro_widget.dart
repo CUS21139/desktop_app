@@ -1,11 +1,11 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 
+import '/src/presentation/components/hoy_ayer_ben_widget.dart';
 import '/src/presentation/components/custom_datepicker.dart';
 import '/src/presentation/components/custom_dialogs.dart';
-import '/src/presentation/components/hoy_ayer_widget.dart';
 
-import '/src/presentation/providers/ayer_hoy_provider.dart';
+import '/src/presentation/providers/ayer_hoy_ben_provider.dart';
 import '/src/presentation/providers/camales_provider.dart';
 import '/src/presentation/providers/clientes_provider.dart';
 import '/src/presentation/providers/ordenes_beneficiado_provider.dart';
@@ -68,7 +68,7 @@ class _FiltrosProgramacionBeneficiadoState extends State<FiltrosProgramacionBene
   Future<void> verConfirmadas() async {
     final token = Provider.of<UsuariosProv>(context, listen: false).token;
     final ordenProv = Provider.of<OrdenesBeneficiadoProv>(context, listen: false);
-    final ayerHoyProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final ayerHoyProv = Provider.of<AyerHoyBenProv>(context, listen: false);
 
     final now = ayerHoyProv.ayer
         ? DateTime.now().subtract(const Duration(days: 1))
@@ -93,7 +93,7 @@ class _FiltrosProgramacionBeneficiadoState extends State<FiltrosProgramacionBene
   void refresh() async {
     final token = Provider.of<UsuariosProv>(context, listen: false).token;
     final ordenProv = Provider.of<OrdenesBeneficiadoProv>(context, listen: false);
-    final ayerHoyProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final ayerHoyProv = Provider.of<AyerHoyBenProv>(context, listen: false);
     final now = ayerHoyProv.ayer
         ? DateTime.now().subtract(const Duration(days: 1))
         : DateTime.now();
@@ -121,8 +121,8 @@ class _FiltrosProgramacionBeneficiadoState extends State<FiltrosProgramacionBene
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const HoyAyerWidget(),
-          Consumer<AyerHoyProv>(builder: (_, service, __) {
+          const HoyAyerBeneficiadoWidget(),
+          Consumer<AyerHoyBenProv>(builder: (_, service, __) {
             return Checkbox(
               content: const Text('Ver Confirmadas'),
               checked: service.confirmadas,
@@ -258,7 +258,7 @@ class _FiltrosProgramacionBeneficiadoState extends State<FiltrosProgramacionBene
   }
 
   Future<void> filtrar() async {
-    final fechaProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final fechaProv = Provider.of<AyerHoyBenProv>(context, listen: false);
     DateTime date;
     if (fecha != null) {
       date = fecha!;

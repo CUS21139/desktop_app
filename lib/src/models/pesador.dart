@@ -8,7 +8,7 @@ class Pesador {
     required this.nombre,
     required this.password,
     required this.zonaCode,
-    this.jabas = 0,
+    // this.jabas = 0,
   });
 
   final int? id;
@@ -17,7 +17,7 @@ class Pesador {
   final String nombre;
   final String password;
   final String zonaCode;
-  final int jabas;
+  // final int jabas;
 
   factory Pesador.fromJson(Map<String, dynamic> json) => Pesador(
         id: json['id'],
@@ -26,7 +26,7 @@ class Pesador {
         nombre: json['nombre'],
         password: json['password'],
         zonaCode: json['zona_code'],
-        jabas: json['jabas'],
+        // jabas: json['jabas'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -36,14 +36,14 @@ class Pesador {
         'nombre': nombre,
         'password': password,
         'zona_code': zonaCode,
-        'jabas': jabas,
+        // 'jabas': jabas,
       };
 
   Pesador copyWith({
     String? newNombre,
     String? newPassword,
     String? newZonaCode,
-    int? newJabas,
+    // int? newJabas,
   }) =>
       Pesador(
         id: id,
@@ -52,6 +52,6 @@ class Pesador {
         nombre: newNombre ?? nombre,
         password: newPassword ?? password,
         zonaCode: newZonaCode ?? zonaCode,
-        jabas: newJabas ?? jabas,
+        // jabas: newJabas ?? jabas,
       );
 }

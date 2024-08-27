@@ -1,18 +1,22 @@
-import 'package:app_desktop/src/services/filtro_vivo_service.dart';
+import 'package:app_desktop/src/presentation/providers/ayer_hoy_ben_provider.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import '../../providers/compras_vivo_provider.dart';
-import '../../providers/productos_vivo_provider.dart';
-import '../../providers/ventas_vivo_provider.dart';
-import '/src/services/excel_service.dart';
-import '/src/services/resumen__service.dart';
 import 'package:provider/provider.dart';
+
+import '/src/services/excel_service.dart';
+import '/src/services/filtro_vivo_service.dart';
+import '/src/services/resumen_service.dart';
 
 import '/src/presentation/components/button_excel.dart';
 import '/src/presentation/components/custom_datepicker.dart';
 import '/src/presentation/components/custom_dialogs.dart';
-import '/src/presentation/components/hoy_ayer_widget.dart';
-import '/src/presentation/providers/ayer_hoy_provider.dart';
+import '/src/presentation/components/hoy_ayer_ben_widget.dart';
+
+import '/src/presentation/providers/compras_beneficiado_provider.dart';
+import '/src/presentation/providers/productos_beneficiado_provider.dart';
+import '/src/presentation/providers/ventas_beneficiado_provider.dart';
+
 import '/src/presentation/utils/text_style.dart';
+
 import '/src/utils/date_formats.dart';
 
 class FiltrosResumenBeneficiado extends StatefulWidget {
@@ -56,14 +60,14 @@ class _FiltrosResumenBeneficiadoState extends State<FiltrosResumenBeneficiado> {
             child: const Text('Buscar'),
           ),
           const SizedBox(height: 20),
-          const HoyAyerWidget(),
+          const HoyAyerBeneficiadoWidget(),
           const SizedBox(height: 20),
           SizedBox(
             width: 100,
             child: ExcelButton(onPressed: () {
-              final ventasProv = Provider.of<VentasVivoProv>(context, listen: false);
-              final comprasProv = Provider.of<ComprasVivoProv>(context, listen: false);
-              final productoProv = Provider.of<ProductosVivoProv>(context, listen: false);
+              final ventasProv = Provider.of<VentasBeneficiadoProv>(context, listen: false);
+              final comprasProv = Provider.of<ComprasBeneficiadoProv>(context, listen: false);
+              final productoProv = Provider.of<ProductosBeneficiadoProv>(context, listen: false);
               Map<String, Map<String, dynamic>> map =
                   TableResumenCtrl.mapResumenVentaCompra(
                 productos: productoProv.productos,
@@ -79,7 +83,7 @@ class _FiltrosResumenBeneficiadoState extends State<FiltrosResumenBeneficiado> {
   }
 
   Future<void> filtrar() async {
-    final fechaProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final fechaProv = Provider.of<AyerHoyBenProv>(context, listen: false);
     DateTime date;
     if (fecha != null) {
       date = fecha!;

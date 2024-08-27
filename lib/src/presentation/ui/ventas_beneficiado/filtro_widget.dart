@@ -7,11 +7,11 @@ import '/src/models/pesador.dart';
 import '/src/models/producto_beneficiado.dart';
 import '/src/models/zona.dart';
 
+import '/src/presentation/components/hoy_ayer_ben_widget.dart';
 import '/src/presentation/components/custom_datepicker.dart';
 import '/src/presentation/components/custom_dialogs.dart';
-import '/src/presentation/components/hoy_ayer_widget.dart';
-import '/src/presentation/providers/ayer_hoy_provider.dart';
 
+import '/src/presentation/providers/ayer_hoy_ben_provider.dart';
 import '/src/presentation/providers/camales_provider.dart';
 import '/src/presentation/providers/clientes_provider.dart';
 import '/src/presentation/providers/pesadores_provider.dart';
@@ -94,8 +94,8 @@ class _FiltrosVentasBeneficiadoState extends State<FiltrosVentasBeneficiado> {
           ),
           const SizedBox(height: 30),
           const Text('Filtros de Busqueda', style: subtitleDataDBStyle),
-          const HoyAyerWidget(),
-          Consumer<AyerHoyProv>(builder: (_, service, __) {
+          const HoyAyerBeneficiadoWidget(),
+          Consumer<AyerHoyBenProv>(builder: (_, service, __) {
             return Checkbox(
               content: const Text('Ver Anuladas'),
               checked: service.anuladas,
@@ -225,7 +225,7 @@ class _FiltrosVentasBeneficiadoState extends State<FiltrosVentasBeneficiado> {
   }
 
   Future<void> filtrar() async {
-    final fechaProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final fechaProv = Provider.of<AyerHoyBenProv>(context, listen: false);
     DateTime date;
     if (fecha != null) {
       date = fecha!;
@@ -273,7 +273,7 @@ class _FiltrosVentasBeneficiadoState extends State<FiltrosVentasBeneficiado> {
   Future<void> verAnuladas() async {
     final token = Provider.of<UsuariosProv>(context, listen: false).token;
     final ventaProv = Provider.of<VentasBeneficiadoProv>(context, listen: false);
-    final ayerHoyProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final ayerHoyProv = Provider.of<AyerHoyBenProv>(context, listen: false);
 
     final now = ayerHoyProv.ayer
         ? DateTime.now().subtract(const Duration(days: 1))
@@ -295,7 +295,7 @@ class _FiltrosVentasBeneficiadoState extends State<FiltrosVentasBeneficiado> {
   void refresh() async {
     final token = Provider.of<UsuariosProv>(context, listen: false).token;
     final ventaProv = Provider.of<VentasBeneficiadoProv>(context, listen: false);
-    final ayerHoyProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final ayerHoyProv = Provider.of<AyerHoyBenProv>(context, listen: false);
     final now = ayerHoyProv.ayer
         ? DateTime.now().subtract(const Duration(days: 1))
         : DateTime.now();

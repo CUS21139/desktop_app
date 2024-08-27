@@ -1,10 +1,14 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 
+import '/src/models/compra_vivo.dart';
+import '/src/models/ordenes_vivo.dart';
+import '/src/models/venta_vivo.dart';
+
 import '/src/presentation/components/custom_dialogs.dart';
 
 import '../providers/compras_vivo_provider.dart';
-import '/src/presentation/providers/ayer_hoy_provider.dart';
+import '../providers/ayer_hoy_vivo_provider.dart';
 import '../providers/ordenes_vivo_provider.dart';
 import '/src/presentation/providers/usuarios_provider.dart';
 import '../providers/ventas_vivo_provider.dart';
@@ -13,14 +17,14 @@ import '../../services/compras_vivos_service.dart';
 import '../../services/ordenes_vivo_service.dart';
 import '../../services/ventas_vivo_service.dart';
 
-class HoyAyerWidget extends StatefulWidget {
-  const HoyAyerWidget({super.key});
+class HoyAyerVivoWidget extends StatefulWidget {
+  const HoyAyerVivoWidget({super.key});
 
   @override
-  State<HoyAyerWidget> createState() => _HoyAyerWidgetState();
+  State<HoyAyerVivoWidget> createState() => _HoyAyerVivoWidgetState();
 }
 
-class _HoyAyerWidgetState extends State<HoyAyerWidget> {
+class _HoyAyerVivoWidgetState extends State<HoyAyerVivoWidget> {
   final compraServ = ComprasVivosService();
   final ordenServ = OrdenesVivoService();
   final ventaServ = VentasVivoService();
@@ -33,22 +37,23 @@ class _HoyAyerWidgetState extends State<HoyAyerWidget> {
     final ventaProv = Provider.of<VentasVivoProv>(context, listen: false);
     final ini = DateTime(date.year, date.month, date.day, 0, 0, 0);
     final fin = DateTime(date.year, date.month, date.day, 23, 59, 59);
-    try {
-      await ordenServ.getOrdenes(token, ini, fin).then((value) {
-        ordenProv.ordenes = value;
-        ordenProv.ordenesResumen = value;
-      });
-      await compraServ.getCompras(token, ini, fin).then((value) {
-        compraProv.compras = value;
-        compraProv.comprasResumen = value;
-      });
-      await ventaServ.getVentas(token, ini, fin).then((value) {
-        ventaProv.setVentas(value, anuladas);
-        ventaProv.ventasResumen = value;
-      });
-    } catch (e) {
+    
+    await Future.wait([
+      ordenServ.getOrdenes(token, ini, fin),
+      compraServ.getCompras(token, ini, fin),
+      ventaServ.getVentas(token, ini, fin)
+    ]).then((result) {
+      ordenProv.ordenes = result[0] as List<OrdenVivo>;
+      ordenProv.ordenesResumen = result[0] as List<OrdenVivo>;
+
+      compraProv.compras = result[1] as List<CompraVivo>;
+      compraProv.comprasResumen = result[1] as List<CompraVivo>;
+
+      ventaProv.setVentas(result[2] as List<VentaVivo>, anuladas);
+      ventaProv.ventasResumen = result[2] as List<VentaVivo>;
+    }).catchError((e) {
       throw Exception(e.toString());
-    }
+    });
   }
 
   Future<void> getAyer(bool anuladas) async {
@@ -58,22 +63,22 @@ class _HoyAyerWidgetState extends State<HoyAyerWidget> {
     final ventaProv = Provider.of<VentasVivoProv>(context, listen: false);
     final ini = DateTime(date.year, date.month, date.day, 0, 0, 0).subtract(const Duration(days: 1));
     final fin = DateTime(date.year, date.month, date.day, 23, 59, 59).subtract(const Duration(days: 1));
-    try {
-      await ordenServ.getOrdenes(token, ini, fin).then((value) {
-        ordenProv.ordenes = value;
-        ordenProv.ordenesResumen = value;
-      });
-      await compraServ.getCompras(token, ini, fin).then((value) {
-        compraProv.compras = value;
-        compraProv.comprasResumen = value;
-      });
-      await ventaServ.getVentas(token, ini, fin).then((value) {
-        ventaProv.setVentas(value, anuladas);
-        ventaProv.ventasResumen = value;
-      });
-    } catch (e) {
+    await Future.wait([
+      ordenServ.getOrdenes(token, ini, fin),
+      compraServ.getCompras(token, ini, fin),
+      ventaServ.getVentas(token, ini, fin)
+    ]).then((result) {
+      ordenProv.ordenes = result[0] as List<OrdenVivo>;
+      ordenProv.ordenesResumen = result[0] as List<OrdenVivo>;
+
+      compraProv.compras = result[1] as List<CompraVivo>;
+      compraProv.comprasResumen = result[1] as List<CompraVivo>;
+
+      ventaProv.setVentas(result[2] as List<VentaVivo>, anuladas);
+      ventaProv.ventasResumen = result[2] as List<VentaVivo>;
+    }).catchError((e) {
       throw Exception(e.toString());
-    }
+    });
   }
 
   @override

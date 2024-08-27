@@ -6,7 +6,7 @@ import '../../providers/ventas_vivo_provider.dart';
 import '../../providers/productos_vivo_provider.dart';
 import '/src/presentation/utils/colors.dart';
 import '/src/presentation/utils/text_style.dart';
-import '/src/services/resumen__service.dart';
+import '../../../services/resumen_service.dart';
 
 class ResumenPorProductoVivo extends StatelessWidget {
   const ResumenPorProductoVivo({super.key});

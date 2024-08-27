@@ -125,7 +125,7 @@ class _CreateOrdenBeneficiadoState extends State<CreateOrdenBeneficiado> {
                             setState(() => zona = item.value);
                           },
                           onChanged: (text, changeReason) {
-                            if(text.isEmpty){
+                            if (text.isEmpty) {
                               pesadorCtrl.clear();
                               camalCtrl.clear();
                               clienteCtrl.clear();
@@ -263,11 +263,12 @@ class _CreateOrdenBeneficiadoState extends State<CreateOrdenBeneficiado> {
                         return AutoSuggestBox<ProductoBeneficiado>(
                           controller: productoCtrl,
                           items: service.productos
-                              .map((e) => AutoSuggestBoxItem<ProductoBeneficiado>(
-                                  value: e,
-                                  label: e.nombre,
-                                  child: Text(e.nombre,
-                                      overflow: TextOverflow.ellipsis)))
+                              .map((e) =>
+                                  AutoSuggestBoxItem<ProductoBeneficiado>(
+                                      value: e,
+                                      label: e.nombre,
+                                      child: Text(e.nombre,
+                                          overflow: TextOverflow.ellipsis)))
                               .toList(),
                           onSelected: (item) {
                             setState(() => producto = item.value);
@@ -280,7 +281,7 @@ class _CreateOrdenBeneficiadoState extends State<CreateOrdenBeneficiado> {
               ),
               const SizedBox(width: 15),
               SizedBox(
-                width: 100,
+                width: 150,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -300,7 +301,6 @@ class _CreateOrdenBeneficiadoState extends State<CreateOrdenBeneficiado> {
                                       overflow: TextOverflow.ellipsis)))
                               .toList(),
                           onSelected: (item) {
-                            //TODO: validar capacidad
                             setState(() => vehiculo = item.value);
                           },
                         );
@@ -311,19 +311,19 @@ class _CreateOrdenBeneficiadoState extends State<CreateOrdenBeneficiado> {
               ),
               const SizedBox(width: 15),
               CustomTextBox(
-                  title: 'Precio', controller: precioCtrl, width: 100),
+                  title: 'Precio', controller: precioCtrl, width: 80),
               const SizedBox(width: 15),
               CustomTextBox(
-                  title: 'Pelado', controller: precioPeladoCtrl, width: 100),
+                  title: 'Pelado', controller: precioPeladoCtrl, width: 80),
               const SizedBox(width: 15),
               CustomTextBox(
-                  title: 'Ave x Jaba', controller: avesCtrl, width: 100),
+                  title: 'Ave x Jaba', controller: avesCtrl, width: 80),
               const SizedBox(width: 15),
               CustomTextBox(
-                  title: 'Nro Jabas', controller: jabasCtrl, width: 100),
+                  title: 'Nro Jabas', controller: jabasCtrl, width: 80),
               const SizedBox(width: 25),
               SizedBox(
-                width: size.width * 0.04,
+                width: 100,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -369,6 +369,9 @@ class _CreateOrdenBeneficiadoState extends State<CreateOrdenBeneficiado> {
 
   void crearDialog() async {
     final token = Provider.of<UsuariosProv>(context, listen: false).token;
+    final ordenesProv =
+        Provider.of<OrdenesBeneficiadoProv>(context, listen: false).ordenes;
+
     if (zona == null ||
         pesador == null ||
         camal == null ||
@@ -383,6 +386,23 @@ class _CreateOrdenBeneficiadoState extends State<CreateOrdenBeneficiado> {
         context,
         'Error al crear',
         const Text('No se ingresaron todos los datos necesarios'),
+      );
+      return;
+    }
+
+    int sumJabas = int.parse(jabasCtrl.text);
+    for (var orden in ordenesProv) {
+      if (orden.placa == vehiculo!.placa) {
+        sumJabas += orden.cantJabas;
+      }
+    }
+
+    if (vehiculo!.capacidad < sumJabas) {
+      final dif = sumJabas - vehiculo!.capacidad;
+      CustomDialog.messageDialog(
+        context,
+        'Error al crear',
+        Text('La capacidad del vehiculo es ${vehiculo!.capacidad} jabas.\n Las jabas sumarían en total $sumJabas.\nLas jabas exceden la capacidad en $dif.'),
       );
       return;
     }
@@ -463,7 +483,8 @@ class _CreateOrdenBeneficiadoState extends State<CreateOrdenBeneficiado> {
 
   Future<bool> crearOrden(DateTime? fecha, String observacion) async {
     final userProv = Provider.of<UsuariosProv>(context, listen: false);
-    final ordenProv = Provider.of<OrdenesBeneficiadoProv>(context, listen: false);
+    final ordenProv =
+        Provider.of<OrdenesBeneficiadoProv>(context, listen: false);
     final now = DateTime.now();
     final ini = DateTime(now.year, now.month, now.day, 0, 0, 0);
     final fin = DateTime(now.year, now.month, now.day, 23, 59, 59);

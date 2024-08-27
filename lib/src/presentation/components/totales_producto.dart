@@ -7,7 +7,7 @@ import '../providers/ordenes_vivo_provider.dart';
 import '/src/presentation/utils/colors.dart';
 import '/src/presentation/utils/text_style.dart';
 
-import '/src/services/resumen__service.dart';
+import '../../services/resumen_service.dart';
 
 /// Widget que recibe un [Map] y muestra los totales por producto según el [Map].
 class TableTotales extends StatelessWidget {

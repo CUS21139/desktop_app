@@ -195,7 +195,7 @@ class _VehiculosViewState extends State<VehiculosView> {
               final vehiculo = Vehiculo(
                 createdAt: DateTime.now(),
                 createdBy: user,
-                placa: capacidadCtrl.text,
+                placa: placaCtrl.text,
                 capacidad: cap,
               );
               await service.insertVehiculo(vehiculo, token).then((v) async {
@@ -222,7 +222,7 @@ class _VehiculosViewState extends State<VehiculosView> {
     final token = Provider.of<UsuariosProv>(context, listen: false).token;
 
     final capacidadCtrl = TextEditingController();
-    capacidadCtrl.text = vehiculo.placa;
+    capacidadCtrl.text = vehiculo.capacidad.toString();
 
     showDialog(
       context: context,
@@ -235,7 +235,7 @@ class _VehiculosViewState extends State<VehiculosView> {
         content: SizedBox(
           width: 400,
           child: TextBox(
-            placeholder: 'Nombre',
+            placeholder: 'Capacidad',
             controller: capacidadCtrl,
           ),
         ),

@@ -1,11 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:app_desktop/src/models/ordenes_beneficiado.dart';
-import 'package:app_desktop/src/models/producto_beneficiado.dart';
-import 'package:app_desktop/src/presentation/providers/ordenes_beneficiado_provider.dart';
-import 'package:app_desktop/src/presentation/providers/ordenes_modelo_beneficiado_provider.dart';
-import 'package:app_desktop/src/presentation/providers/productos_beneficiado_provider.dart';
-import 'package:app_desktop/src/services/ordenes_beneficiado_service.dart';
 import 'package:provider/provider.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
@@ -13,6 +7,8 @@ import 'package:horizontal_data_table/horizontal_data_table.dart';
 import '/src/models/camal.dart';
 import '/src/models/cliente.dart';
 import '/src/models/zona.dart';
+import '/src/models/ordenes_beneficiado.dart';
+import '/src/models/producto_beneficiado.dart';
 
 import '/src/presentation/components/button_custom.dart';
 import '/src/presentation/components/button_excel.dart';
@@ -21,7 +17,10 @@ import '/src/presentation/components/custom_dialogs.dart';
 import '/src/presentation/components/custom_textfield.dart';
 import '/src/presentation/components/table_cell.dart';
 
-import '/src/presentation/providers/ayer_hoy_provider.dart';
+import '/src/presentation/providers/ayer_hoy_ben_provider.dart';
+import '/src/presentation/providers/ordenes_beneficiado_provider.dart';
+import '/src/presentation/providers/ordenes_modelo_beneficiado_provider.dart';
+import '/src/presentation/providers/productos_beneficiado_provider.dart';
 import '/src/presentation/providers/camales_provider.dart';
 import '/src/presentation/providers/clientes_provider.dart';
 import '/src/presentation/providers/usuarios_provider.dart';
@@ -30,6 +29,7 @@ import '/src/presentation/providers/zonas_provider.dart';
 import '/src/presentation/utils/colors.dart';
 import '/src/services/clientes_service.dart';
 import '/src/services/excel_service.dart';
+import '/src/services/ordenes_beneficiado_service.dart';
 import '/src/utils/date_formats.dart';
 
 class TableOrdenesBeneficiado extends StatefulWidget {
@@ -274,7 +274,7 @@ class _TableOrdenesBeneficiadoState extends State<TableOrdenesBeneficiado> {
                                 ),
                               ),
                             ),
-                            CellItem(text: orden.observacion ?? '', width: 150),
+                            CellItem(text: orden.observacion ?? '', width: 120),
                           ],
                         ),
                       ),
@@ -292,7 +292,7 @@ class _TableOrdenesBeneficiadoState extends State<TableOrdenesBeneficiado> {
   void refresh(BuildContext context) async {
     final token = Provider.of<UsuariosProv>(context, listen: false).token;
     final ordenProv = Provider.of<OrdenesBeneficiadoProv>(context, listen: false);
-    final fechaProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final fechaProv = Provider.of<AyerHoyBenProv>(context, listen: false);
     final now = fechaProv.ayer
         ? DateTime.now().subtract(const Duration(days: 1))
         : DateTime.now();
@@ -455,7 +455,7 @@ class _TableOrdenesBeneficiadoState extends State<TableOrdenesBeneficiado> {
   void update(BuildContext context) {
     final token = Provider.of<UsuariosProv>(context, listen: false).token;
     final ordenesProv = Provider.of<OrdenesBeneficiadoProv>(context, listen: false);
-    final fechaProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final fechaProv = Provider.of<AyerHoyBenProv>(context, listen: false);
 
     Camal? uCamal;
     final uCamalCtrl = TextEditingController();
@@ -683,7 +683,7 @@ class _TableOrdenesBeneficiadoState extends State<TableOrdenesBeneficiado> {
   void deleteSeleccion(BuildContext context) {
     final token = Provider.of<UsuariosProv>(context, listen: false).token;
     final ordenProv = Provider.of<OrdenesBeneficiadoProv>(context, listen: false);
-    final fechaProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final fechaProv = Provider.of<AyerHoyBenProv>(context, listen: false);
 
     final now = fechaProv.ayer
         ? DateTime.now().subtract(const Duration(days: 1))
@@ -731,7 +731,7 @@ class _TableOrdenesBeneficiadoState extends State<TableOrdenesBeneficiado> {
   void confirmarOrden(BuildContext context, OrdenBeneficiado orden) async {
     final token = Provider.of<UsuariosProv>(context, listen: false).token;
     final ordenProv = Provider.of<OrdenesBeneficiadoProv>(context, listen: false);
-    final fechaProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final fechaProv = Provider.of<AyerHoyBenProv>(context, listen: false);
 
     final now = fechaProv.ayer
         ? DateTime.now().subtract(const Duration(days: 1))
@@ -778,7 +778,7 @@ class _TableOrdenesBeneficiadoState extends State<TableOrdenesBeneficiado> {
   void editPrecio() async {
     final token = Provider.of<UsuariosProv>(context, listen: false).token;
     final ordenProv = Provider.of<OrdenesBeneficiadoProv>(context, listen: false);
-    final fechaProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final fechaProv = Provider.of<AyerHoyBenProv>(context, listen: false);
 
     ProductoBeneficiado? producto;
     final productoCtrl = TextEditingController();
@@ -870,7 +870,7 @@ class _TableOrdenesBeneficiadoState extends State<TableOrdenesBeneficiado> {
   void editAves() async {
     final token = Provider.of<UsuariosProv>(context, listen: false).token;
     final ordenProv = Provider.of<OrdenesBeneficiadoProv>(context, listen: false);
-    final fechaProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final fechaProv = Provider.of<AyerHoyBenProv>(context, listen: false);
 
     ProductoBeneficiado? producto;
     final productoCtrl = TextEditingController();
@@ -968,7 +968,7 @@ class _TableOrdenesBeneficiadoState extends State<TableOrdenesBeneficiado> {
   void descontarPrecio() async {
     final token = Provider.of<UsuariosProv>(context, listen: false).token;
     final ordenProv = Provider.of<OrdenesBeneficiadoProv>(context, listen: false);
-    final fechaProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final fechaProv = Provider.of<AyerHoyBenProv>(context, listen: false);
 
     final now = fechaProv.ayer
         ? DateTime.now().subtract(const Duration(days: 1))

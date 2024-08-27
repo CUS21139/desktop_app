@@ -10,7 +10,7 @@ import '/src/presentation/components/custom_dialogs.dart';
 import '/src/presentation/components/custom_textfield.dart';
 import '/src/presentation/components/table_cell.dart';
 
-import '/src/presentation/providers/ayer_hoy_provider.dart';
+import '../../providers/ayer_hoy_vivo_provider.dart';
 import '../../providers/compras_vivo_provider.dart';
 import '../../providers/productos_vivo_provider.dart';
 import '/src/presentation/providers/proveedores_provider.dart';

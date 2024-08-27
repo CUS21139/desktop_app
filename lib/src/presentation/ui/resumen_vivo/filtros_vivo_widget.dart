@@ -4,14 +4,14 @@ import '../../providers/compras_vivo_provider.dart';
 import '../../providers/productos_vivo_provider.dart';
 import '../../providers/ventas_vivo_provider.dart';
 import '/src/services/excel_service.dart';
-import '/src/services/resumen__service.dart';
+import '../../../services/resumen_service.dart';
 import 'package:provider/provider.dart';
 
 import '/src/presentation/components/button_excel.dart';
 import '/src/presentation/components/custom_datepicker.dart';
 import '/src/presentation/components/custom_dialogs.dart';
-import '/src/presentation/components/hoy_ayer_widget.dart';
-import '/src/presentation/providers/ayer_hoy_provider.dart';
+import '../../components/hoy_ayer_vivo_widget.dart';
+import '../../providers/ayer_hoy_vivo_provider.dart';
 import '/src/presentation/utils/text_style.dart';
 import '/src/utils/date_formats.dart';
 
@@ -56,7 +56,7 @@ class _FiltrosResumenVivoState extends State<FiltrosResumenVivo> {
             child: const Text('Buscar'),
           ),
           const SizedBox(height: 20),
-          const HoyAyerWidget(),
+          const HoyAyerVivoWidget(),
           const SizedBox(height: 20),
           SizedBox(
             width: 100,

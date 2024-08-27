@@ -1,3 +1,4 @@
+import 'package:app_desktop/src/presentation/components/custom_textfield.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 
@@ -166,12 +167,10 @@ class _ProveedorViewState extends State<ProveedorView> {
           'Crear Nuevo Proveedor',
           style: TextStyle(fontSize: 16),
         ),
-        content: SizedBox(
+        content: CustomTextBox(
           width: 400,
-          child: TextBox(
-            placeholder: 'Nombre',
-            controller: nombreCtrl,
-          ),
+          controller: nombreCtrl,
+          title: 'Nombre',
         ),
         actions: [
           FilledButton(

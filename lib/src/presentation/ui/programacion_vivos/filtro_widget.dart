@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 
 import '/src/presentation/components/custom_datepicker.dart';
 import '/src/presentation/components/custom_dialogs.dart';
-import '/src/presentation/components/hoy_ayer_widget.dart';
+import '../../components/hoy_ayer_vivo_widget.dart';
 
-import '/src/presentation/providers/ayer_hoy_provider.dart';
+import '../../providers/ayer_hoy_vivo_provider.dart';
 import '/src/presentation/providers/camales_provider.dart';
 import '/src/presentation/providers/clientes_provider.dart';
 import '../../providers/ordenes_vivo_provider.dart';
@@ -120,7 +120,7 @@ class _FiltrosProgramacionVivoState extends State<FiltrosProgramacionVivo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const HoyAyerWidget(),
+          const HoyAyerVivoWidget(),
           Consumer<AyerHoyProv>(builder: (_, service, __) {
             return Checkbox(
               content: const Text('Ver Confirmadas'),

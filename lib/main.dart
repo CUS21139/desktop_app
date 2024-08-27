@@ -1,13 +1,14 @@
-import 'package:app_desktop/src/presentation/providers/compras_beneficiado_provider.dart';
-import 'package:app_desktop/src/presentation/providers/ordenes_beneficiado_provider.dart';
-import 'package:app_desktop/src/presentation/providers/ordenes_modelo_beneficiado_provider.dart';
-import 'package:app_desktop/src/presentation/providers/productos_beneficiado_provider.dart';
-import 'package:app_desktop/src/presentation/providers/ventas_beneficiado_provider.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/foundation.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:provider/provider.dart';
 
+import '/src/presentation/providers/ayer_hoy_ben_provider.dart';
+import '/src/presentation/providers/compras_beneficiado_provider.dart';
+import '/src/presentation/providers/ordenes_beneficiado_provider.dart';
+import '/src/presentation/providers/ordenes_modelo_beneficiado_provider.dart';
+import '/src/presentation/providers/productos_beneficiado_provider.dart';
+import '/src/presentation/providers/ventas_beneficiado_provider.dart';
 import '/src/presentation/providers/bancos_provider.dart';
 import '/src/presentation/providers/caja_provider.dart';
 import '/src/presentation/providers/camales_jabas_prov.dart';
@@ -21,7 +22,7 @@ import '/src/presentation/providers/estado_proveedor_mov.dart';
 import '/src/presentation/providers/estado_trabajador_mov.dart';
 import '/src/presentation/providers/estado_sin_nombre_provider.dart';
 import '/src/presentation/providers/jabas_provider.dart';
-import '/src/presentation/providers/ayer_hoy_provider.dart';
+import 'src/presentation/providers/ayer_hoy_vivo_provider.dart';
 import 'src/presentation/providers/ordenes_vivo_provider.dart';
 import 'src/presentation/providers/ordenes_modelo_vivo_provider.dart';
 import '/src/presentation/providers/pesadores_provider.dart';
@@ -84,6 +85,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => EstadoTrabajadorProv()),
         ChangeNotifierProvider(create: (_) => JabasProv()),
         ChangeNotifierProvider(create: (_) => AyerHoyProv()),
+        ChangeNotifierProvider(create: (_) => AyerHoyBenProv()),
         ChangeNotifierProvider(create: (_) => OrdenesVivoProv()),
         ChangeNotifierProvider(create: (_) => OrdenesBeneficiadoProv()),
         ChangeNotifierProvider(create: (_) => OrdenesModeloVivoProv()),

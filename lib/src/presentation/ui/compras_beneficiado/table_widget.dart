@@ -10,7 +10,7 @@ import '/src/presentation/components/custom_dialogs.dart';
 import '/src/presentation/components/custom_textfield.dart';
 import '/src/presentation/components/table_cell.dart';
 
-import '/src/presentation/providers/ayer_hoy_provider.dart';
+import '/src/presentation/providers/ayer_hoy_ben_provider.dart';
 import '/src/presentation/providers/compras_beneficiado_provider.dart';
 import '/src/presentation/providers/productos_beneficiado_provider.dart';
 import '/src/presentation/providers/proveedores_provider.dart';
@@ -184,7 +184,7 @@ class _TableComprasBeneficiadoState extends State<TableComprasBeneficiado> {
     final token = Provider.of<UsuariosProv>(context, listen: false).token;
     final compraProv = Provider.of<ComprasBeneficiadoProv>(context, listen: false);
     final proveedorProv = Provider.of<ProveedoresProv>(context, listen: false);
-    final fechaProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final fechaProv = Provider.of<AyerHoyBenProv>(context, listen: false);
 
     final now = fechaProv.ayer
         ? DateTime.now().subtract(const Duration(days: 1))
@@ -211,7 +211,7 @@ class _TableComprasBeneficiadoState extends State<TableComprasBeneficiado> {
     final token = Provider.of<UsuariosProv>(context, listen: false).token;
     final compraProv = Provider.of<ComprasBeneficiadoProv>(context, listen: false);
     final proveedorProv = Provider.of<ProveedoresProv>(context, listen: false);
-    final fechaProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final fechaProv = Provider.of<AyerHoyBenProv>(context, listen: false);
 
     final now = fechaProv.ayer
         ? DateTime.now().subtract(const Duration(days: 1))
@@ -351,7 +351,7 @@ class _TableComprasBeneficiadoState extends State<TableComprasBeneficiado> {
     final token = Provider.of<UsuariosProv>(context, listen: false).token;
     final compraProv = Provider.of<ComprasBeneficiadoProv>(context, listen: false);
     final proveedorProv = Provider.of<ProveedoresProv>(context, listen: false);
-    final fechaProv = Provider.of<AyerHoyProv>(context, listen: false);
+    final fechaProv = Provider.of<AyerHoyBenProv>(context, listen: false);
 
     final now = fechaProv.ayer
         ? DateTime.now().subtract(const Duration(days: 1))

@@ -363,6 +363,8 @@ class _CreateOrdenVivoState extends State<CreateOrdenVivo> {
   }
 
   void crearDialog() async {
+    final ordenesProv =
+        Provider.of<OrdenesVivoProv>(context, listen: false).ordenes;
     final token = Provider.of<UsuariosProv>(context, listen: false).token;
     if (zona == null ||
         pesador == null ||
@@ -377,6 +379,23 @@ class _CreateOrdenVivoState extends State<CreateOrdenVivo> {
         context,
         'Error al crear',
         const Text('No se ingresaron todos los datos necesarios'),
+      );
+      return;
+    }
+
+    int sumJabas = int.parse(jabasCtrl.text);
+    for (var orden in ordenesProv) {
+      if (orden.placa == vehiculo!.placa) {
+        sumJabas += orden.cantJabas;
+      }
+    }
+
+    if (vehiculo!.capacidad < sumJabas) {
+      final dif = sumJabas - vehiculo!.capacidad;
+      CustomDialog.messageDialog(
+        context,
+        'Error al crear',
+        Text('La capacidad del vehiculo es ${vehiculo!.capacidad} jabas.\n Las jabas sumarían en total $sumJabas.\nLas jabas exceden la capacidad en $dif.'),
       );
       return;
     }

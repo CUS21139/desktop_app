@@ -1,3 +1,4 @@
+import 'package:app_desktop/src/presentation/ui/tablas/t_vehiculos_view.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:provider/provider.dart';
 
@@ -54,6 +55,11 @@ class _TablasViewState extends State<TablasView> {
       selectedBackgroundColor: Colors.grey.withOpacity(0.1),
       text: const Text('Productos Beneficiado'),
       body: const ProductosBeneficiadoView(),
+    ),
+    Tab(
+      selectedBackgroundColor: Colors.grey.withOpacity(0.1),
+      text: const Text('Vehículos'),
+      body: const VehiculosView(),
     ),
     Tab(
       selectedBackgroundColor: Colors.grey.withOpacity(0.1),

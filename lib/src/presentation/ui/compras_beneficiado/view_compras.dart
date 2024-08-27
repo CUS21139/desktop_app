@@ -1,7 +1,7 @@
-import 'package:app_desktop/src/presentation/ui/compras_beneficiado/create_widget.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 
 import '../../components/totales_producto.dart';
+import 'create_widget.dart';
 import 'table_widget.dart';
 import 'filtro_widget.dart';
 

@@ -1,11 +1,11 @@
-import '../models/compra_vivo.dart';
-import '../models/ordenes_vivo.dart';
-import '../models/producto_vivo.dart';
-import '../models/venta_vivo.dart';
+import '/src/abstracts_entities/compra.dart';
+import '/src/abstracts_entities/orden.dart';
+import '/src/abstracts_entities/producto.dart';
+import '/src/abstracts_entities/venta.dart';
 
 class TableResumenCtrl {
   static Map<String, Map<String, int>> mapResumenOrdenCompra(
-      List<CompraVivo> compras, List<OrdenVivo> ordenes) {
+      List<Compra> compras, List<Orden> ordenes) {
     Map<String, Map<String, int>> result = {};
     for (var e in compras) {
       if (!result.containsKey(e.productoNombre)) {
@@ -41,9 +41,9 @@ class TableResumenCtrl {
   }
 
   static Map<String, Map<String, dynamic>> mapResumenVentaCompra({
-    required List<CompraVivo> compras,
-    required List<VentaVivo> ventas,
-    required List<ProductoVivo> productos,
+    required List<Compra> compras,
+    required List<Venta> ventas,
+    required List<Producto> productos,
   }) {
     Map<String, Map<String, dynamic>> result = {};
     ventas.removeWhere((e) => e.anulada == 1);

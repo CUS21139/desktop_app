@@ -270,7 +270,7 @@ class _CreateOrdenModeloBeneficiadoState extends State<CreateOrdenModeloBenefici
               ),
               const SizedBox(width: 15),
               SizedBox(
-                width: 100,
+                width: 150,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -290,7 +290,6 @@ class _CreateOrdenModeloBeneficiadoState extends State<CreateOrdenModeloBenefici
                                   ))
                               .toList(),
                           onSelected: (item) async {
-                            //TODO: validar capacidad
                             setState(() => vehiculo = item.value);
                           },
                         );
@@ -301,19 +300,19 @@ class _CreateOrdenModeloBeneficiadoState extends State<CreateOrdenModeloBenefici
               ),
               const SizedBox(width: 15),
               CustomTextBox(
-                  title: 'Precio', controller: precioCtrl, width: 100),
+                  title: 'Precio', controller: precioCtrl, width: 80),
               const SizedBox(width: 15),
               CustomTextBox(
-                  title: 'Pelado', controller: peladoCtrl, width: 100),
+                  title: 'Pelado', controller: peladoCtrl, width: 80),
               const SizedBox(width: 15),
               CustomTextBox(
-                  title: 'Ave x Jaba', controller: avesCtrl, width: 100),
+                  title: 'Ave x Jaba', controller: avesCtrl, width: 80),
               const SizedBox(width: 15),
               CustomTextBox(
-                  title: 'Nro Jabas', controller: jabasCtrl, width: 100),
+                  title: 'Nro Jabas', controller: jabasCtrl, width: 80),
               const SizedBox(width: 25),
               SizedBox(
-                width: size.width * 0.04,
+                width: 100,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [

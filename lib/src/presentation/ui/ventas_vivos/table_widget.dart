@@ -11,7 +11,7 @@ import '/src/presentation/components/custom_dialogs.dart';
 import '/src/presentation/components/custom_textfield.dart';
 import '/src/presentation/components/table_cell.dart';
 
-import '/src/presentation/providers/ayer_hoy_provider.dart';
+import '../../providers/ayer_hoy_vivo_provider.dart';
 import '/src/presentation/providers/clientes_provider.dart';
 import '/src/presentation/providers/usuarios_provider.dart';
 import '../../providers/ventas_vivo_provider.dart';
